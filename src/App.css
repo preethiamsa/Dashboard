@@ -3,6 +3,9 @@
   padding: 0 ;
   margin: 0 ;
 }
+body{
+  background-color: aliceblue;
+}
 .category{
   display: flex;
   flex-direction: column;
@@ -30,7 +33,7 @@ h6{
   font-size: 16px;
 }
 .box{
-  background-color: aliceblue;
+  background-color: white;
   padding: 15px;
   border-radius: 10px;
   width: 400px;
@@ -42,4 +45,10 @@ h6{
  align-items: center;
  justify-content: center;
  height: 100%;
+}
+.add-widget-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
 }

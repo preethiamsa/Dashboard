@@ -27,7 +27,18 @@ function PieCenterLabel({ children }) {
 export default function PieChartWithCenterLabel({data}) {
     
   return (
-    <PieChart series={[{ data, innerRadius: 45 }]} {...size}>
+    <PieChart series={[
+      {
+        innerRadius: 60,
+        outerRadius: 40,
+        data,
+      },
+    ]}
+    margin={{ right: 50,bottom:70 }}
+    width={200}
+    height={200}
+    legend={{hidden:true}}
+    >
       <PieCenterLabel>2 Total</PieCenterLabel>
     </PieChart>
   );
