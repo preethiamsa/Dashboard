@@ -26,12 +26,15 @@ function PieCenterLabel({ children }) {
 
 export default function PieChartWithCenterLabel({data}) {
     
+ const reverseData = [...data].reverse()
+console.log(data);
+
   return (
     <PieChart series={[
       {
         innerRadius: 60,
         outerRadius: 40,
-        data,
+        data : reverseData
       },
     ]}
     margin={{ right: 50,bottom:70 }}

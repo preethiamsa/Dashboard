@@ -4,7 +4,7 @@
   margin: 0 ;
 }
 body{
-  background-color: aliceblue;
+  background-color: #F2F5FA;
 }
 .category{
   display: flex;
@@ -26,8 +26,8 @@ body{
 .box-container{
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 10px;
+  padding-left: 20px;
 }
 h6{
   font-size: 16px;
@@ -38,6 +38,11 @@ h6{
   border-radius: 10px;
   width: 400px;
   height: 170px;
+  box-shadow: 
+  0px -5px 10px rgba(240, 240, 245, 0.5),
+  0px 5px 10px rgba(240, 240, 245, 0.5), 
+  -5px 0px 10px rgba(240, 240, 245, 0.5),
+  5px 0px 10px rgba(240, 240, 245, 0.5);
 }
 .no-data{
  display: flex;
@@ -50,5 +55,38 @@ h6{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: #FCFCFD;
+  box-shadow: 
+  0px -5px 10px rgba(240, 240, 245, 0.5),
+  0px 5px 10px rgba(240, 240, 245, 0.5), 
+  -5px 0px 10px rgba(240, 240, 245, 0.5),
+  5px 0px 10px rgba(240, 240, 245, 0.5);
+}
+.parent{
+  width: 100%;
+  background-color: #E5E5E5;
+  height: 10px;
+  border-radius: 10px;
+  display: flex;
+}
+.div1{
+  background-color: #6E0F0A;
+  width: 24%;
+  height: 10px;
+  border-radius: 10px 0px 0px 10px;
+}
+.div2{
+  background-color: #C82819;
+  width: 24%;
+  height: 10px;
+}
+.div3{
+  background-color: #EB9132;
+  width: 24%;
+  height: 10px;
+}
+.div4{
+  background-color: #F0C341;
+  width: 12%;
+  height: 10px;
 }

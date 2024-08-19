@@ -1,0 +1,97 @@
+{
+    "category": {
+      "CSPM Executive Dashboard": [
+        {
+          "title": "Cloud Accounts",
+          "data": [
+            {
+              "label": "Connected",
+              "value": 2
+            },
+            {
+              "label": "Not Connected",
+              "value": 2
+            }
+          ],
+          "total": 2
+        },
+        {
+          "title": "Cloud Account Risk Assessment",
+          "data": [
+            {
+              "label": "Failed",
+              "value": 1689
+            },
+            {
+              "label": "Warning",
+              "value": 681
+            },
+            {
+              "label": "Not available",
+              "value": 36
+            },
+            {
+              "label": "Passed",
+              "value": 7253
+            }
+          ],
+          "total": 9659
+        }
+      ],
+      "CWPP Dashboard": [
+        {
+          "title": "Top 5 Namespace Specific Alerts"
+        },
+        {
+          "title": "Workload Alerts"
+        }
+      ],
+      "Registry Scan": [
+        {
+          "title": "Image Risk Assessment",
+          "data": [
+            {
+              "name": "Critical",
+              "count": 9
+            },
+            {
+              "name": "High",
+              "count": 150
+            },
+            {
+              "name": "Medium",
+              "count": 869
+            },
+            {
+              "name": "Low",
+              "count": 442
+            }
+          ],
+          "total": 1470
+        },
+        {
+            "title": "Image Security Issues",
+            "data": [
+              {
+                "name": "Critical",
+                "count": 2
+              },
+              {
+                "name": "High",
+                "count": 2
+              },
+              {
+                "name": "Medium",
+                "count": 2
+              },
+              {
+                "name": "Low",
+                "count": 1
+              }
+            ],
+            "total": 2
+          }
+      ]
+    }
+  }
+  

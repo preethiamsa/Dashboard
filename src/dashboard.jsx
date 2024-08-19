@@ -1,14 +1,16 @@
-import React from 'react';
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton} from '@mui/material';
+import React, { useContext, useEffect } from 'react';
+import { Box, Button, styled } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import LoopIcon from '@mui/icons-material/Loop';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import CloseIcon from '@mui/icons-material/Close';
 import PieChartWithCenterLabel from './components/pieChart';
 import graph from './assets/analysis.png';
-import { styled } from '@mui/material/styles';
+import DialogBox from './components/dialogBox';
+import { useState } from 'react';
+import DataContext from './context/context';
+
 
 const CloudAccountData = [
     { value: 2, label: 'Not Connected', color: '#c4e0eb' },
@@ -22,42 +24,87 @@ const CloudAccountRiskData = [
     { value: 1689, label: 'Failed', color: '#B9140F' },
 ];
 
+
+const CustomButton = styled(Button)({
+    color: 'black',
+    backgroundColor: 'white',
+    borderRadius: '5px',
+    padding: '6px 10px',
+    textTransform: 'capitalize',
+    '&:hover': {
+        backgroundColor: 'white'
+    }
+});
+
+const AddToWidgetStyle = styled(Button)({
+    color: 'black',
+    border: '1px solid grey',
+    padding: '6px 10px',
+    textTransform: 'capitalize',
+    '&:hover': {
+        backgroundColor: 'inherit',
+        border: '1px solid grey'
+    }
+});
+const buttonStyle = { color: '#101d6b', border: '2px solid #101d6b', boxShadow: 'none' };
+
+
 const Dashboard = () => {
 
-    // Custom Button styles
-    const CustomButton = styled(Button)({
-        color: 'black',
-        backgroundColor: 'white',
-        borderRadius: '5px',
-        padding: '6px 10px',
-        textTransform: 'capitalize',
-        '&:hover': {
-            backgroundColor: 'white'
-        }
-    });
+    const [open, setOpen] = useState(false);
 
-    const AddToWidgetStyle = styled(Button)({
-        color: 'black',
-        border: '1px solid grey',
-        padding: '6px 10px',
-        textTransform: 'capitalize',
-        '&:hover': {
-            backgroundColor: 'inherit',
-            border: '1px solid grey'
-        }
-    });
 
-    const CustomDialog = styled(Dialog)({
-        '& .MuiDialog-container': {
-            position: 'absolute !important',
-            right: 0,
-        },
-        '& .MuiPaper-root': {
-            width: '100%',
-        },
-    });
+    const { data } = useContext(DataContext)
 
-    const buttonStyle = { color: '#101d6b', border: '2px solid #101d6b', boxShadow: 'none' };
+    const addWidgetBtn = () => {
+        setOpen(true);
+    }
+
+    useEffect(() => {
+        Object.keys(data.category).forEach((categoryKey) => {
+            data.category[categoryKey].forEach((item) => {
+                if (item.data) {
+                    item.data.forEach((val) => {
+                        switch (val.label) {
+                            case 'Not Connected': {
+                                val.color = '#c4e0eb';
+                                break;
+                            }
+                            case 'Connected': {
+                                val.color = '#0088FE';
+                                break;
+                            }
+                            case 'Passed': {
+                                val.color = '#19A55A';
+                                break;
+                            }
+                            case 'Not available': {
+                                val.color = '#E1EBFF';
+                                break;
+                            }
+                            case 'Warning': {
+                                val.color = '#FAD732';
+                                break;
+                            }
+                            case 'Failed': {
+                                val.color = '#B9140F';
+                                break;
+                            }
+                            default:
+                                break;
+                        }
+                    });
+                }
+            });
+        });
+
+        console.log(data);
+
+
+        console.log(data);
+
+    }, [])
+
 
     return (
         <div>
@@ -66,7 +113,7 @@ const Dashboard = () => {
                     <h5>CNAPP Dashboard</h5>
                 </div>
                 <div className="dashboard-btn-container">
-                    <CustomButton variant="contained" endIcon={<AddIcon />}>
+                    <CustomButton variant="contained" endIcon={<AddIcon />} onClick={addWidgetBtn}>
                         Add Widget
                     </CustomButton>
                     <CustomButton variant="contained"><LoopIcon /></CustomButton>
@@ -75,7 +122,37 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="category">
-                <div className="cspm-executive-dashboard">
+                {Object.keys(data.category).map((key) => (
+                    <div key={key}>
+                        <h6>{key}</h6>
+                        <div className="box-container">
+                            {data.category[key].map((element, index) => (
+                                <Box className="box" key={index}>
+                                    <p>{element.title}</p>
+                                    {key === "Registry Scan" ? <>
+                                        <p>{element.total}<span> Total {index == 0 ? "Vulnerabilities" : "Images"}</span></p>
+                                        <div className='parent'>
+                                            <div className='div1'></div>
+                                            <div className='div2'></div>
+                                            <div className='div3'></div>
+                                            <div className='div4'></div>
+                                        </div>
+                                    </> :
+                                        !element.data ? <div className="no-data">
+                                            <img src={graph} alt="graph" width="40px" />
+                                            <p>No Graph data available</p>
+                                        </div> : <div>
+                                            <PieChartWithCenterLabel data={element.data} />
+                                        </div>}
+                                </Box>
+                            ))}
+                            <Box className="box add-widget-box">
+                                <AddToWidgetStyle variant="outlined" startIcon={<AddIcon />} onClick={addWidgetBtn}>Add Widget</AddToWidgetStyle>
+                            </Box>
+                        </div>
+                    </div>
+                ))}
+                {/* <div className="cspm-executive-dashboard">
                     <h6>CSPM Executive Dashboard</h6>
                     <div className="box-container cspm-executive-box">
                         <Box className="box">
@@ -91,7 +168,7 @@ const Dashboard = () => {
                             </div>
                         </Box>
                         <Box className="box add-widget-box">
-                            <AddToWidgetStyle variant="outlined" startIcon={<AddIcon />}>Add Widget</AddToWidgetStyle>
+                            <AddToWidgetStyle variant="outlined" startIcon={<AddIcon />} onClick={addWidgetBtn}>Add Widget</AddToWidgetStyle>
                         </Box>
                     </div>
                 </div>
@@ -113,7 +190,7 @@ const Dashboard = () => {
                             </div>
                         </Box>
                         <Box className="box add-widget-box">
-                            <AddToWidgetStyle variant="outlined" startIcon={<AddIcon />}>Add Widget</AddToWidgetStyle>
+                            <AddToWidgetStyle variant="outlined" startIcon={<AddIcon />} onClick={addWidgetBtn}>Add Widget</AddToWidgetStyle>
                         </Box>
                     </div>
                 </div>
@@ -123,30 +200,32 @@ const Dashboard = () => {
                         <Box className="box">
                             <p>Image Risk Assessment</p>
                             <p>1470<span>Total Vulnerabilities</span></p>
+                            <div className='parent'>
+                                <div className='div1'></div>
+                                <div className='div2'></div>
+                                <div className='div3'></div>
+                                <div className='div4'></div>
+                            </div>
                         </Box>
                         <Box className="box">
                             <p>Image Security Issues</p>
                             <p>2<span>Total Images</span></p>
+                            <div>
+                                <div className='parent'>
+                                    <div className='div1'></div>
+                                    <div className='div2'></div>
+                                    <div className='div3'></div>
+                                    <div className='div4'></div>
+                                </div>
+                            </div>
                         </Box>
                         <Box className="box add-widget-box">
-                            <AddToWidgetStyle variant="outlined" startIcon={<AddIcon />}>Add Widget</AddToWidgetStyle>
+                            <AddToWidgetStyle variant="outlined" startIcon={<AddIcon />} onClick={addWidgetBtn}>Add Widget</AddToWidgetStyle>
                         </Box>
                     </div>
-                </div>
+                </div> */}
+                <DialogBox open={open} setOpen={setOpen} />
             </div>
-            <CustomDialog open={true} maxWidth="md">
-                <DialogTitle sx={{ backgroundColor: '#101d6b', display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'white' }}>
-                    <p>Add Widget</p>
-                    <IconButton><CloseIcon sx={{ color: 'white' }} /></IconButton>
-                </DialogTitle>
-                <DialogContent>
-                    <p>Personalize your dashboard by adding the following widget</p>
-                </DialogContent>
-                <DialogActions>
-                    <Button variant="outlined">Cancel</Button>
-                    <Button variant="contained">Confirm</Button>
-                </DialogActions>
-            </CustomDialog>
         </div>
     );
 }

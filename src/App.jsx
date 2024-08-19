@@ -1,8 +1,8 @@
 import './App.css'
 import Dashboard from './dashboard'
 
-function App() {
 
+function App() {
   return (
     <div>
       <Dashboard />
