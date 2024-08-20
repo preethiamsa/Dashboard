@@ -50,6 +50,7 @@ To start the development server:
 
 ```bash
 npm run dev
+```
 
 ## Usage
 
