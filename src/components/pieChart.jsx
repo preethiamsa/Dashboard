@@ -37,7 +37,7 @@ console.log(data);
         data : reverseData
       },
     ]}
-    margin={{ right: 50,bottom:70 }}
+    margin={{ right: 50,bottom:10 }}
     width={200}
     height={200}
     legend={{hidden:true}}

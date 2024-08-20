@@ -51,20 +51,20 @@
           "title": "Image Risk Assessment",
           "data": [
             {
-              "name": "Critical",
-              "count": 9
+              "label": "Critical",
+              "value": 9
             },
             {
-              "name": "High",
-              "count": 150
+              "label": "High",
+              "value": 150
             },
             {
-              "name": "Medium",
-              "count": 869
+              "label": "Medium",
+              "value": 869
             },
             {
-              "name": "Low",
-              "count": 442
+              "label": "Low",
+              "value": 442
             }
           ],
           "total": 1470
@@ -73,20 +73,20 @@
             "title": "Image Security Issues",
             "data": [
               {
-                "name": "Critical",
-                "count": 2
+                "label": "Critical",
+                "value": 2
               },
               {
-                "name": "High",
-                "count": 2
+                "label": "High",
+                "value": 2
               },
               {
-                "name": "Medium",
-                "count": 2
+                "label": "Medium",
+                "value": 2
               },
               {
-                "name": "Low",
-                "count": 1
+                "label": "Low",
+                "value": 1
               }
             ],
             "total": 2
