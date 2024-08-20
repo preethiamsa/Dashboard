@@ -50,3 +50,11 @@ To start the development server:
 
 ```bash
 npm run dev
+
+## Usage
+
+- **Adding Data**: Use the Context API or Redux setup to add new sections or dashboards dynamically.
+
+- **Updating Data**: Modify existing dashboard data based on specific criteria within the JSON structure.
+
+- **Search Data**: Type dashboard titles to retrieve and display relevant data.
